@@ -10,7 +10,7 @@ function App() {
   const [state, updateState] = createSignal<RunState>("idle");
   const [routine, setRoutine] = createSignal<RoutineMachine | null>(null);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     if (state() === "running") {
       routine()?.stop();
       setRoutine(null);

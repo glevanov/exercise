@@ -25,7 +25,7 @@ export class RoutineMachine {
     this.stopped = false;
   }
 
-  doExercise() {
+  doExercise(): void {
     if (this.stopped || this.currentIndex >= this.routine.length) {
       this.stop();
       return;
@@ -44,7 +44,7 @@ export class RoutineMachine {
     }, step.duration * SECOND);
   }
 
-  start() {
+  start(): void {
     this.updateState("running");
     this.stopped = false;
     this.currentIndex = 0;
@@ -54,7 +54,7 @@ export class RoutineMachine {
     }, 2 * SECOND);
   }
 
-  stop() {
+  stop(): void {
     this.stopped = true;
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
