@@ -15,6 +15,7 @@ export class RoutineMachine {
   private readonly routine: Routine;
   private currentIndex: number;
   private stopped: boolean;
+  private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   constructor({ updateText, routine, updateState }: Options) {
     this.updateText = updateText;
@@ -37,7 +38,7 @@ export class RoutineMachine {
       this.updateText(step.name);
     }
 
-    setTimeout(() => {
+    this.timeoutId = setTimeout(() => {
       this.currentIndex++;
       this.doExercise();
     }, step.duration * SECOND);
@@ -48,13 +49,17 @@ export class RoutineMachine {
     this.stopped = false;
     this.currentIndex = 0;
     this.updateText("Get ready");
-    setTimeout(() => {
+    this.timeoutId = setTimeout(() => {
       this.doExercise();
     }, 2 * SECOND);
   }
 
   stop() {
     this.stopped = true;
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
     this.updateState("done");
     this.updateText("Done");
   }

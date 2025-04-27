@@ -15,7 +15,7 @@ importers:
         specifier: 3.5.3
         version: 3.5.3
       typescript:
-        specifier: ^5.8.3
+        specifier: 5.8.3
         version: 5.8.3
       vite:
         specifier: 6.3.3
