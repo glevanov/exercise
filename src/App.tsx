@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, onCleanup } from "solid-js";
 import "./App.css";
 import { testRoutine } from "./routines/test-routine";
 import { RoutineMachine } from "./routine-machine";
@@ -24,6 +24,10 @@ function App() {
       newRoutine.start();
     }
   };
+
+  onCleanup(() => {
+    routine()?.stop();
+  });
 
   return (
     <>
