@@ -1,11 +1,13 @@
 import { createSignal, onCleanup } from "solid-js";
-import "./App.css";
+import styles from "./app.module.css";
 import { testRoutine } from "./routines/test-routine";
 import { RoutineMachine } from "./routine-machine";
+import { Status } from "./components/status";
+import { StartButton } from "./components/start-button";
 
 export type RunState = "idle" | "running" | "done";
 
-function App() {
+export const App = () => {
   const [text, updateText] = createSignal<string>("Idle");
   const [state, updateState] = createSignal<RunState>("idle");
   const [routine, setRoutine] = createSignal<RoutineMachine | null>(null);
@@ -30,17 +32,11 @@ function App() {
   });
 
   return (
-    <>
-      <h1>Exercise</h1>
-
-      <p>Currently doing: {text()}</p>
-      <div class="card">
-        <button onClick={handleClick}>
-          {state() === "running" ? "Stop" : "Start"}
-        </button>
+    <main class={styles.screen}>
+      <div class={styles.content}>
+        <Status text={text()} />
+        <StartButton onClick={handleClick} state={state()} />
       </div>
-    </>
+    </main>
   );
-}
-
-export default App;
+};

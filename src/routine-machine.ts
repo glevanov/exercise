@@ -1,4 +1,4 @@
-import { RunState } from "./App";
+import { RunState } from "./app";
 import { Routine } from "./routines/types";
 
 const SECOND = 1000;
