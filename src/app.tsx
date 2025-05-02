@@ -1,4 +1,4 @@
-import { createSignal, onCleanup } from "solid-js";
+import { useState, useEffect } from "preact/hooks";
 import styles from "./app.module.css";
 import { testRoutine } from "./routines/test-routine";
 import { RoutineMachine } from "./routine-machine";
@@ -8,13 +8,13 @@ import { StartButton } from "./components/start-button";
 export type RunState = "idle" | "running" | "done";
 
 export const App = () => {
-  const [text, updateText] = createSignal<string>("Idle");
-  const [state, updateState] = createSignal<RunState>("idle");
-  const [routine, setRoutine] = createSignal<RoutineMachine | null>(null);
+  const [text, updateText] = useState<string>("Idle");
+  const [state, updateState] = useState<RunState>("idle");
+  const [routine, setRoutine] = useState<RoutineMachine | null>(null);
 
   const handleClick = (): void => {
-    if (state() === "running") {
-      routine()?.stop();
+    if (state === "running") {
+      routine?.stop();
       setRoutine(null);
     } else {
       const newRoutine = new RoutineMachine({
@@ -27,16 +27,18 @@ export const App = () => {
     }
   };
 
-  onCleanup(() => {
-    routine()?.stop();
-  });
+  useEffect(() => {
+    return () => {
+      routine?.stop();
+    };
+  }, []);
 
   return (
     <main class={styles.screen}>
-      <div class={styles.content}>
-        <Status text={text()} />
-        <StartButton onClick={handleClick} state={state()} />
-      </div>
+      <section class={styles.content}>
+        <Status text={text} />
+        <StartButton handleClick={handleClick} state={state} />
+      </section>
     </main>
   );
 };

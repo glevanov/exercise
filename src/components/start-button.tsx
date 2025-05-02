@@ -2,13 +2,13 @@ import { RunState } from "../app";
 import styles from "./start-button.module.css";
 
 interface StartButtonProps {
-  onClick: () => void;
+  handleClick: () => void;
   state: RunState;
 }
 
-export const StartButton = ({ onClick, state }: StartButtonProps) => {
+export const StartButton = ({ handleClick, state }: StartButtonProps) => {
   return (
-    <button class={styles.button} onClick={onClick}>
+    <button class={styles.button} onClick={handleClick}>
       {state === "running" ? "Stop" : "Start"}
     </button>
   );

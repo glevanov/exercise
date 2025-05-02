@@ -1,8 +1,6 @@
 /* @refresh reload */
-import { render } from "solid-js/web";
+import { render } from "preact";
 import "./index.css";
 import { App } from "./app";
 
-const root = document.getElementById("root");
-
-root && render(() => <App />, root);
+render(<App />, document.getElementById("root")!);
