@@ -1,5 +1,6 @@
 import { RunState } from "./app";
 import { Routine } from "./routines/types";
+import { acquireWakeLock, releaseWakeLock } from "./wake-lock";
 
 const SECOND = 1000;
 
@@ -7,36 +8,59 @@ type Options = {
   routine: Routine;
   updateText: (value: string) => void;
   updateState: (value: RunState) => void;
+  playStep: () => void;
+  playDone: () => void;
 };
 
 export class RoutineMachine {
   private readonly updateText: (value: string) => void;
   private readonly updateState: (value: RunState) => void;
   private readonly routine: Routine;
+  private readonly playStep: () => void;
+  private readonly playDone: () => void;
   private currentIndex: number;
   private stopped: boolean;
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  constructor({ updateText, routine, updateState }: Options) {
+  constructor({
+    updateText,
+    routine,
+    updateState,
+    playStep,
+    playDone,
+  }: Options) {
     this.updateText = updateText;
     this.updateState = updateState;
+    this.playStep = playStep;
+    this.playDone = playDone;
     this.routine = routine;
     this.currentIndex = 0;
     this.stopped = false;
   }
 
   doExercise(): void {
-    if (this.stopped || this.currentIndex >= this.routine.length) {
+    if (this.stopped) {
+      void releaseWakeLock();
+      return;
+    }
+
+    if (this.currentIndex === this.routine.length) {
       this.stop();
+      this.playDone();
       return;
     }
 
     const step = this.routine[this.currentIndex];
-    if (step.type === "break") {
-      this.updateText("Break");
-    } else if (step.type === "exercise") {
-      this.updateText(step.name);
+
+    switch (step.type) {
+      case "break":
+        this.updateText("Break");
+        break;
+      case "exercise":
+        this.updateText(step.name);
+        break;
     }
+    this.playStep();
 
     this.timeoutId = setTimeout(() => {
       this.currentIndex++;
@@ -49,6 +73,7 @@ export class RoutineMachine {
     this.stopped = false;
     this.currentIndex = 0;
     this.updateText("Get ready");
+    void acquireWakeLock();
     this.timeoutId = setTimeout(() => {
       this.doExercise();
     }, 2 * SECOND);
@@ -62,5 +87,6 @@ export class RoutineMachine {
     }
     this.updateState("done");
     this.updateText("Done");
+    void releaseWakeLock();
   }
 }

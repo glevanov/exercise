@@ -7,6 +7,15 @@ import { StartButton } from "./components/start-button";
 
 export type RunState = "idle" | "running" | "done";
 
+const playStep = () => {
+  const audio = new Audio("step.mp3");
+  audio.play();
+};
+const playDone = () => {
+  const audio = new Audio("done.mp3");
+  audio.play();
+};
+
 export const App = () => {
   const [text, updateText] = useState<string>("Idle");
   const [state, updateState] = useState<RunState>("idle");
@@ -21,6 +30,8 @@ export const App = () => {
         routine: testRoutine,
         updateState,
         updateText,
+        playStep,
+        playDone,
       });
       setRoutine(newRoutine);
       newRoutine.start();
