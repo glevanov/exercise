@@ -1,3 +1,5 @@
 # Exercise
 
-A simple exercise routine timer built with [SolidJS](https://www.solidjs.com/) and [Vite](https://vitejs.dev/).
+A simple exercise routine timer built with Preact and Vite.
+
+Deployed at https://glevanov.github.io/exercise.

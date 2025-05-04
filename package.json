@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:gh-pages": "pnpm vite build --base /exercise/",
     "preview": "vite preview",
     "prettier": "prettier . --write",
     "tsc": "tsc --noEmit"

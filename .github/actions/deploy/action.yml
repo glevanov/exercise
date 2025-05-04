@@ -1,0 +1,14 @@
+name: Deploy
+description: Deploys the application to GitHub Pages
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build
+      run: pnpm run build:gh-pages
+      shell: bash
+    - name: Deploy
+      uses: crazy-max/ghaction-github-pages@v4
+      with:
+        target_branch: gh-pages
+        build_dir: dist
