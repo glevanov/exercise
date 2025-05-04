@@ -7,15 +7,39 @@
     "build": "vite build",
     "build:gh-pages": "pnpm vite build --base /exercise/",
     "preview": "vite preview",
-    "prettier": "prettier . --write",
-    "tsc": "tsc --noEmit"
+    "lint": "pnpm run lint:prettier && pnpm run lint:oxlint && pnpm run lint:tsc",
+    "lint:ci": "pnpm run lint:prettier-check && pnpm run lint:oxlint && pnpm run lint:tsc",
+    "lint:prettier": "prettier --write src",
+    "lint:prettier-check": "prettier --check src",
+    "lint:oxlint": "oxlint src --deny-warnings",
+    "lint:tsc": "tsc --noEmit",
+    "lint:setup-hooks": "simple-git-hooks",
+    "postinstall": "pnpm exec simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged && pnpm run lint:tsc"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "oxlint --fix --deny-warnings"
+    ],
+    "*.css": [
+      "prettier --write"
+    ],
+    "*.{json,yaml,yml}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "preact": "10.26.5"
   },
   "devDependencies": {
     "@preact/preset-vite": "2.10.1",
+    "lint-staged": "15.5.1",
+    "oxlint": "0.16.9",
     "prettier": "3.5.3",
+    "simple-git-hooks": "2.13.0",
     "typescript": "5.8.3",
     "vite": "6.3.3"
   },

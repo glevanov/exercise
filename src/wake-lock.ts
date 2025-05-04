@@ -10,7 +10,9 @@ export const acquireWakeLock = async () => {
   try {
     wakeLock = await navigator.wakeLock.request("screen");
     document.addEventListener("visibilitychange", handleVisibilityChange);
-  } catch (err) {}
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const releaseWakeLock = async () => {

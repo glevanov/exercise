@@ -1,0 +1,11 @@
+name: Lint
+description: Lints project
+
+runs:
+  using: "composite"
+  steps:
+    - name: Lint
+      run: pnpm run lint:ci
+      shell: bash
+    #- name: Test
+    #run: pnpm run test
