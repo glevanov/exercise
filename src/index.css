@@ -1,3 +1,23 @@
+:root {
+  --bg-default-light: #f5f6f6;
+  --bg-default-dark: #1a1b1d;
+
+  --text-default-light: #1a1b1d;
+  --text-default-dark: #f5f6f6;
+
+  --text-contrast-light: #ffffff;
+  --text-contrast-dark: #1a1b1d;
+
+  --button-primary-light: #3f7824;
+  --button-primary-dark: #90cb62;
+  
+  --button-danger-light: #bb2d00;
+  --button-danger-dark: #ffaa97;
+
+  --border-light-light: #e2e3e5;
+  --border-light-dark: #3c3f44;
+}
+
 body {
   margin: 0;
 }
