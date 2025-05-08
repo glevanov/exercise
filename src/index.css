@@ -1,23 +1,36 @@
 :root {
-  --bg-default-light: #f5f6f6;
-  --bg-default-dark: #1a1b1d;
+  --bg-default: #f5f6f6;
+  --text-default: #1a1b1d;
+  --text-contrast: #ffffff;
+  --button-primary: #3f7824;
+  --button-danger: #bb2d00;
+  --border-light: #e2e3e5;
 
-  --text-default-light: #1a1b1d;
-  --text-default-dark: #f5f6f6;
+  /* Credit goes to https://systemfontstack.com/ */
+  --system-font:
+    -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+    helvetica neue, Cantarell, Ubuntu, roboto, noto, helvetica, arial,
+    sans-serif;
 
-  --text-contrast-light: #ffffff;
-  --text-contrast-dark: #1a1b1d;
-
-  --button-primary-light: #3f7824;
-  --button-primary-dark: #90cb62;
-  
-  --button-danger-light: #bb2d00;
-  --button-danger-dark: #ffaa97;
-
-  --border-light-light: #e2e3e5;
-  --border-light-dark: #3c3f44;
+  @media (prefers-color-scheme: dark) {
+    --bg-default: #1a1b1d;
+    --text-default: #f5f6f6;
+    --text-contrast: #1a1b1d;
+    /* These just look weird
+    --button-primary: #90cb62;
+    --button-danger: #ffaa97;
+    */
+    --border-light: #3c3f44;
+  }
 }
 
 body {
   margin: 0;
+
+  background-color: var(--bg-default);
+
+  font-family: var(--system-font);
+  font-size: 20px;
+  line-height: normal;
+  color: var(--text-default);
 }

@@ -2,4 +2,20 @@
   border-radius: 50%;
   height: 7em;
   width: 7em;
+
+  border: none;
+
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--text-contrast);
+
+  transition: background-color 0.1s ease-in-out;
+}
+
+.start {
+  background-color: var(--button-primary);
+}
+
+.stop {
+  background-color: var(--button-danger);
 }

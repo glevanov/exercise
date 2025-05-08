@@ -7,6 +7,9 @@ settings:
 importers:
   .:
     dependencies:
+      classnames:
+        specifier: 2.5.1
+        version: 2.5.1
       preact:
         specifier: 10.26.5
         version: 10.26.5
@@ -785,6 +788,12 @@ packages:
         integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==,
       }
     engines: { node: ^12.17.0 || ^14.13 || >=16.0.0 }
+
+  classnames@2.5.1:
+    resolution:
+      {
+        integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==,
+      }
 
   cli-cursor@5.0.0:
     resolution:
@@ -1874,6 +1883,8 @@ snapshots:
   caniuse-lite@1.0.30001716: {}
 
   chalk@5.4.1: {}
+
+  classnames@2.5.1: {}
 
   cli-cursor@5.0.0:
     dependencies:
