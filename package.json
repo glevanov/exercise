@@ -13,8 +13,7 @@
     "lint:prettier-check": "prettier --check src",
     "lint:oxlint": "oxlint src --deny-warnings",
     "lint:tsc": "tsc --noEmit",
-    "lint:setup-hooks": "simple-git-hooks",
-    "postinstall": "pnpm exec simple-git-hooks"
+    "lint:setup-hooks": "simple-git-hooks"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged && pnpm run lint:tsc"

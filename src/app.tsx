@@ -1,6 +1,7 @@
 import { useState, useEffect } from "preact/hooks";
+
 import styles from "./app.module.css";
-import { testRoutine } from "./routines/test-routine";
+import { coreRoutine } from "./routines/core-routine";
 import { RoutineMachine } from "./routine-machine";
 import { Status } from "./components/status";
 import { StartButton } from "./components/start-button";
@@ -9,11 +10,11 @@ export type RunState = "idle" | "running" | "done";
 
 const playStep = () => {
   const audio = new Audio("step.mp3");
-  audio.play();
+  void audio.play();
 };
 const playDone = () => {
   const audio = new Audio("done.mp3");
-  audio.play();
+  void audio.play();
 };
 
 export const App = () => {
@@ -27,7 +28,7 @@ export const App = () => {
       setRoutine(null);
     } else {
       const newRoutine = new RoutineMachine({
-        routine: testRoutine,
+        routine: coreRoutine,
         updateState,
         updateText,
         playStep,
@@ -45,10 +46,16 @@ export const App = () => {
   }, []);
 
   return (
-    <main class={styles.screen}>
-      <section class={styles.content}>
-        <Status text={text} />
-        <StartButton handleClick={handleClick} state={state} />
+    <main className={styles.screen}>
+      <section className={styles.content}>
+        <div className={styles.top}>
+          <Status text={text} />
+        </div>
+        <StartButton
+          className={styles.button}
+          handleClick={handleClick}
+          state={state}
+        />
       </section>
     </main>
   );

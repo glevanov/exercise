@@ -6,11 +6,27 @@
 }
 
 .content {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  box-sizing: border-box;
+  padding: 2em;
+  height: 100%;
+  width: 100%;
+}
+
+.top {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+  justify-content: end;
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 2em;
 
-  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.button {
+  place-self: center;
+  align-self: start;
+  margin-top: 2em;
 }
