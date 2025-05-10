@@ -8,10 +8,6 @@ import { StartButton } from "./components/start-button";
 
 export type RunState = "idle" | "running" | "done";
 
-const playStep = () => {
-  const audio = new Audio("step.mp3");
-  void audio.play();
-};
 const playDone = () => {
   const audio = new Audio("done.mp3");
   void audio.play();
@@ -21,6 +17,15 @@ export const App = () => {
   const [text, updateText] = useState<string>("Idle");
   const [state, updateState] = useState<RunState>("idle");
   const [routine, setRoutine] = useState<RoutineMachine | null>(null);
+  // have to keep same reference to avoid Safari autoplay issues
+  const [stepAudio, setStepAudio] = useState<HTMLAudioElement | null>(null);
+
+  const playStep = () => {
+    if (!stepAudio) {
+      setStepAudio(new Audio("done.mp3"));
+    }
+    void stepAudio?.play();
+  };
 
   const handleClick = (): void => {
     if (state === "running") {
