@@ -1,31 +1,20 @@
-import { useState, useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 
 import styles from "./app.module.css";
-import { coreRoutine } from "./routines/core-routine";
-import { RoutineMachine } from "./routine-machine";
+import { RoutineMachine } from "./routines/routine-machine";
 import { Status } from "./components/status";
 import { StartButton } from "./components/start-button";
+import { RoutineName } from "./routines/types";
+import { routines } from "./routines/const";
+import { playAudio } from "./lib/play-audio";
 
 export type RunState = "idle" | "running" | "done";
-
-const playDone = () => {
-  const audio = new Audio("done.mp3");
-  void audio.play();
-};
 
 export const App = () => {
   const [text, updateText] = useState<string>("Idle");
   const [state, updateState] = useState<RunState>("idle");
+  const [selectedRoutine, setSelectedRoutine] = useState<RoutineName>("core");
   const [routine, setRoutine] = useState<RoutineMachine | null>(null);
-  // have to keep same reference to avoid Safari autoplay issues
-  const [stepAudio, setStepAudio] = useState<HTMLAudioElement | null>(null);
-
-  const playStep = () => {
-    if (!stepAudio) {
-      setStepAudio(new Audio("done.mp3"));
-    }
-    void stepAudio?.play();
-  };
 
   const handleClick = (): void => {
     if (state === "running") {
@@ -33,11 +22,10 @@ export const App = () => {
       setRoutine(null);
     } else {
       const newRoutine = new RoutineMachine({
-        routine: coreRoutine,
+        routine: routines[selectedRoutine],
         updateState,
         updateText,
-        playStep,
-        playDone,
+        playAudio,
       });
       setRoutine(newRoutine);
       newRoutine.start();
@@ -54,6 +42,15 @@ export const App = () => {
     <main className={styles.screen}>
       <section className={styles.content}>
         <div className={styles.top}>
+          <select
+            value={selectedRoutine}
+            onChange={(evt) =>
+              setSelectedRoutine(evt.currentTarget.value as RoutineName)
+            }
+          >
+            <option value="core">Core</option>
+            <option value="test">Test</option>
+          </select>
           <Status text={text} />
         </div>
         <StartButton

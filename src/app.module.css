@@ -17,7 +17,7 @@
 .top {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: space-between;
   height: 100%;
   box-sizing: border-box;
   padding-bottom: 2em;

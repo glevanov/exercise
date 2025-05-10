@@ -1,6 +1,7 @@
-import { RunState } from "./app";
-import { Routine } from "./routines/types";
-import { acquireWakeLock, releaseWakeLock } from "./wake-lock";
+import { RunState } from "../app";
+import { Routine } from "./types";
+import { acquireWakeLock, releaseWakeLock } from "../lib/wake-lock";
+import { type Source } from "../lib/play-audio";
 
 const SECOND = 1000;
 
@@ -8,31 +9,22 @@ type Options = {
   routine: Routine;
   updateText: (value: string) => void;
   updateState: (value: RunState) => void;
-  playStep: () => void;
-  playDone: () => void;
+  playAudio: (target: Source) => Promise<void>;
 };
 
 export class RoutineMachine {
   private readonly updateText: (value: string) => void;
   private readonly updateState: (value: RunState) => void;
   private readonly routine: Routine;
-  private readonly playStep: () => void;
-  private readonly playDone: () => void;
+  private readonly playAudio: (target: Source) => Promise<void>;
   private currentIndex: number;
   private stopped: boolean;
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  constructor({
-    updateText,
-    routine,
-    updateState,
-    playStep,
-    playDone,
-  }: Options) {
+  constructor({ updateText, routine, updateState, playAudio }: Options) {
     this.updateText = updateText;
     this.updateState = updateState;
-    this.playStep = playStep;
-    this.playDone = playDone;
+    this.playAudio = playAudio;
     this.routine = routine;
     this.currentIndex = 0;
     this.stopped = false;
@@ -46,7 +38,7 @@ export class RoutineMachine {
 
     if (this.currentIndex === this.routine.length) {
       this.stop();
-      this.playDone();
+      void this.playAudio("done");
       return;
     }
 
@@ -60,7 +52,7 @@ export class RoutineMachine {
         this.updateText(step.name);
         break;
     }
-    this.playStep();
+    void this.playAudio("step");
 
     this.timeoutId = setTimeout(() => {
       this.currentIndex++;
