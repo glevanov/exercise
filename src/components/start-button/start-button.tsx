@@ -1,7 +1,7 @@
 import { JSX } from "preact";
 import cn from "classnames";
 
-import { RunState } from "../app";
+import { RunState } from "../../app";
 import styles from "./start-button.module.css";
 
 interface StartButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {

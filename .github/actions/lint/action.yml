@@ -7,5 +7,6 @@ runs:
     - name: Lint
       run: pnpm run lint:ci
       shell: bash
-    #- name: Test
-    #run: pnpm run test
+    - name: Test
+      run: pnpm run test
+      shell: bash

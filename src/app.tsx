@@ -2,8 +2,8 @@ import { useEffect, useState } from "preact/hooks";
 
 import styles from "./app.module.css";
 import { RoutineMachine } from "./routines/routine-machine";
-import { Status } from "./components/status";
-import { StartButton } from "./components/start-button";
+import { Status } from "./components/status/status";
+import { StartButton } from "./components/start-button/start-button";
 import { RoutineName } from "./routines/types";
 import { routines } from "./routines/const";
 import { playAudio } from "./lib/play-audio";
