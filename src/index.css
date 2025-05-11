@@ -5,6 +5,8 @@
   --button-primary: #3f7824;
   --button-danger: #bb2d00;
   --border-light: #e2e3e5;
+  --border-strong: #bbbec3;
+  --focus: #30839d;
 
   /* Credit goes to https://systemfontstack.com/ */
   --system-font:
@@ -21,6 +23,8 @@
     --button-danger: #ffaa97;
     */
     --border-light: #3c3f44;
+    --border-strong: #6f757e;
+    --focus: #5db3bf;
   }
 }
 
