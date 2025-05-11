@@ -7,8 +7,14 @@ import { StartButton } from "./components/start-button/start-button";
 import { RoutineName } from "./routines/types";
 import { routines } from "./routines/const";
 import { playAudio } from "./lib/play-audio";
+import { Select } from "./components/select/select";
 
 export type RunState = "idle" | "running" | "done";
+
+const options = [
+  { value: "core", label: "Core" },
+  { value: "test", label: "Test" },
+];
 
 export const App = () => {
   const [text, updateText] = useState<string>("Idle");
@@ -42,15 +48,13 @@ export const App = () => {
     <main className={styles.screen}>
       <section className={styles.content}>
         <div className={styles.top}>
-          <select
+          <Select
             value={selectedRoutine}
+            options={options}
             onChange={(evt) =>
               setSelectedRoutine(evt.currentTarget.value as RoutineName)
             }
-          >
-            <option value="core">Core</option>
-            <option value="test">Test</option>
-          </select>
+          />
           <Status text={text} />
         </div>
         <StartButton

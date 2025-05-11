@@ -1,0 +1,10 @@
+.select {
+  padding: 4px 8px;
+
+  border: 1px solid var(--border-light);
+  border-radius: 0.3em;
+  background: var(--bg-default);
+  font-size: inherit;
+
+  appearance: none;
+}
