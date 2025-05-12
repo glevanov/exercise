@@ -32,8 +32,10 @@
     ]
   },
   "dependencies": {
+    "@xstate/react": "5.0.4",
     "classnames": "2.5.1",
-    "preact": "10.26.5"
+    "preact": "10.26.5",
+    "xstate": "5.19.3"
   },
   "devDependencies": {
     "@preact/preset-vite": "2.10.1",
