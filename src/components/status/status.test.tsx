@@ -6,6 +6,8 @@ import { Status } from "./status";
 describe("Status", () => {
   it("renders the status text", () => {
     const { getByText } = render(<Status text="Snakes on a Plane" />);
-    expect(getByText("Snakes on a Plane", { exact: false })).not.toBeNull();
+    expect(
+      getByText("Snakes on a Plane", { exact: false }),
+    ).toBeInTheDocument();
   });
 });

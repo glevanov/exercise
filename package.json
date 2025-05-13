@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "2.10.1",
+    "@testing-library/jest-dom": "6.6.3",
     "@testing-library/preact": "3.2.4",
     "happy-dom": "17.4.7",
     "lint-staged": "15.5.1",

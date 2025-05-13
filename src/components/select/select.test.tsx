@@ -19,7 +19,7 @@ describe("Select", () => {
     expect(select.value).toBe("walls");
 
     options.forEach(({ label }) => {
-      expect(getByText(label)).not.toBeNull();
+      expect(getByText(label)).toBeInTheDocument();
     });
   });
 
