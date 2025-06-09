@@ -43,7 +43,7 @@
     "@testing-library/preact": "3.2.4",
     "happy-dom": "17.4.7",
     "lint-staged": "16.0.0",
-    "oxlint": "0.16.11",
+    "oxlint": "0.18.1",
     "prettier": "3.5.3",
     "simple-git-hooks": "2.13.0",
     "typescript": "5.8.3",
