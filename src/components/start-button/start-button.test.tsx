@@ -1,5 +1,6 @@
-import { render, fireEvent } from "@testing-library/preact";
-import { vi, describe, it, expect } from "vitest";
+import { fireEvent, render } from "@testing-library/preact";
+import { describe, expect, it, vi } from "vitest";
+
 import { StartButton } from "./start-button";
 
 describe("StartButton", () => {

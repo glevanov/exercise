@@ -1,5 +1,5 @@
-import { JSX } from "preact";
 import cn from "classnames";
+import { JSX } from "preact";
 
 import styles from "./status.module.css";
 

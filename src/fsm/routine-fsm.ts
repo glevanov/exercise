@@ -1,7 +1,8 @@
 import { assign, setup } from "xstate";
-import type { Routine } from "../routines/types";
-import { acquireWakeLock, releaseWakeLock } from "../lib/wake-lock";
+
 import { playAudio } from "../lib/play-audio";
+import { acquireWakeLock, releaseWakeLock } from "../lib/wake-lock";
+import type { Routine } from "../routines/types";
 
 const SECOND = 1000;
 
@@ -9,6 +10,7 @@ type RoutineContext = {
   routine: Routine;
   currentIndex: number;
   currentText: string;
+  startTimer: boolean;
 };
 
 type StartEvent = { type: "START"; routine: Routine };
@@ -45,6 +47,7 @@ export const routineFsm = setup({
     routine: [],
     currentIndex: 0,
     currentText: "Idle",
+    startTimer: false,
   },
   states: {
     idle: {
@@ -66,6 +69,7 @@ export const routineFsm = setup({
         assign({
           currentText: "Get ready",
           currentIndex: 0,
+          startTimer: false,
         }),
       ],
       after: {
@@ -84,6 +88,7 @@ export const routineFsm = setup({
             const step = context.routine[context.currentIndex];
             return step.type === "exercise" ? step.name : "Break";
           },
+          startTimer: true,
         }),
         "playStepSound",
       ],

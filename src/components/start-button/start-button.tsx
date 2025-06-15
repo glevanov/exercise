@@ -1,5 +1,5 @@
-import type { JSX } from "preact";
 import cn from "classnames";
+import type { JSX } from "preact";
 
 import styles from "./start-button.module.css";
 
