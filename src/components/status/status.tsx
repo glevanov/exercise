@@ -8,11 +8,5 @@ interface StatusProps extends JSX.HTMLAttributes<HTMLParagraphElement> {
 }
 
 export const Status = ({ text, className }: StatusProps) => {
-  return (
-    <p className={cn(className, styles.status)}>
-      Currently doing:
-      <br />
-      {text}
-    </p>
-  );
+  return <p className={cn(className, styles.status)}>{text}</p>;
 };

@@ -1,8 +1,7 @@
 .button {
-  border-radius: 50%;
-  height: 7em;
-  width: 7em;
-  padding: 0;
+  border-radius: 0.6em;
+  width: 100%;
+  padding: 1.5em;
 
   border: none;
 
