@@ -10,6 +10,7 @@ type RoutineContext = {
   routine: Routine;
   currentIndex: number;
   currentText: string;
+  nextText: string;
   startTimer: boolean;
 };
 
@@ -47,12 +48,14 @@ export const routineFsm = setup({
     routine: [],
     currentIndex: 0,
     currentText: "Idle",
+    nextText: "",
     startTimer: false,
   },
   states: {
     idle: {
       entry: assign({
         currentText: "Idle",
+        nextText: "",
       }),
       on: {
         START: {
@@ -68,6 +71,10 @@ export const routineFsm = setup({
         "acquireWakeLock",
         assign({
           currentText: "Get ready",
+          nextText: ({ context }) => {
+            const next = context.routine[0];
+            return "name" in next ? next.name : "";
+          },
           currentIndex: 0,
           startTimer: false,
         }),
@@ -87,6 +94,19 @@ export const routineFsm = setup({
           currentText: ({ context }) => {
             const step = context.routine[context.currentIndex];
             return step.type === "exercise" ? step.name : "Break";
+          },
+          nextText: ({ context }) => {
+            for (
+              let i = context.currentIndex + 1;
+              i < context.routine.length;
+              i++
+            ) {
+              const nextStep = context.routine[i];
+              if (nextStep !== undefined && nextStep.type === "exercise") {
+                return nextStep.name;
+              }
+            }
+            return "";
           },
           startTimer: true,
         }),
@@ -124,6 +144,7 @@ export const routineFsm = setup({
         "releaseWakeLock",
         assign({
           currentText: "Done",
+          nextText: "",
           startTimer: false,
         }),
       ],

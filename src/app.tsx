@@ -57,6 +57,9 @@ export const App = () => {
             key={state.context.startTimer ? state.context.currentIndex : "idle"}
             seconds={state.context.startTimer ? currentStep?.duration : 0}
           />
+          {state.context.nextText.length > 0 ? (
+            <Status text={`Next: ${state.context.nextText}`} />
+          ) : null}
         </div>
         <StartButton
           className={styles.button}
