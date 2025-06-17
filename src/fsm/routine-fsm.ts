@@ -124,6 +124,7 @@ export const routineFsm = setup({
         "releaseWakeLock",
         assign({
           currentText: "Done",
+          startTimer: false,
         }),
       ],
       on: {

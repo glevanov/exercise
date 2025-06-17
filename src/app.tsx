@@ -53,12 +53,10 @@ export const App = () => {
             }
           />
           <Status text={state.context.currentText} />
-          {state.context.startTimer ? (
-            <CountdownTimer
-              key={state.context.currentIndex}
-              seconds={currentStep?.duration}
-            />
-          ) : null}
+          <CountdownTimer
+            key={state.context.startTimer ? state.context.currentIndex : "idle"}
+            seconds={state.context.startTimer ? currentStep?.duration : 0}
+          />
         </div>
         <StartButton
           className={styles.button}
