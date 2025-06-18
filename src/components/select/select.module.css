@@ -1,13 +1,11 @@
 .select {
+  appearance: none;
   padding: 4px 8px;
-
   border: 1px solid var(--border-strong);
   border-radius: 0.3em;
   background: var(--bg-default);
-  font-size: inherit;
   color: inherit;
-
-  appearance: none;
+  font-size: inherit;
 }
 
 .select:focus,

@@ -46,6 +46,7 @@
     "lint-staged": "16.1.2",
     "oxlint": "1.1.0",
     "prettier": "3.5.3",
+    "prettier-plugin-css-order": "2.1.2",
     "simple-git-hooks": "2.13.0",
     "typescript": "5.8.3",
     "vite": "6.3.5",
