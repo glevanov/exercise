@@ -44,7 +44,7 @@
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "happy-dom": "18.0.1",
     "lint-staged": "16.1.2",
-    "oxlint": "1.1.0",
+    "oxlint": "1.2.0",
     "prettier": "3.5.3",
     "prettier-plugin-css-order": "2.1.2",
     "simple-git-hooks": "2.13.0",
