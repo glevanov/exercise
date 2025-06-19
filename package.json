@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@xstate/react": "5.0.5",
+    "@xstate/react": "6.0.0",
     "classnames": "2.5.1",
     "preact": "10.26.9",
     "xstate": "5.19.4"
