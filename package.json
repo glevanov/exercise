@@ -34,7 +34,7 @@
   "dependencies": {
     "@xstate/react": "5.0.5",
     "classnames": "2.5.1",
-    "preact": "10.26.9",
+    "preact": "10.26.10",
     "xstate": "5.19.4"
   },
   "devDependencies": {
